@@ -1,9 +1,19 @@
 import tkinter as tk
+from sys import flags
 
 window = tk.Tk()
 move = 1
 moves = [" X ", " 0 "]
 field = []
+
+
+def draw():
+    flag = True
+    for i in range(3):
+        for j in range(3):
+            if field[i][j]["text"] == "   ":
+                flag = False
+    return flag
 
 def clean(button, label):
     for i in range(3):
@@ -26,10 +36,10 @@ def is_win():
             return True
 
     for i in range(3):
-        el = field[0][i]
-        flag = True             #вертикально
+        el = field[0][i]["text"]
+        flag = True                #вертикально
         for j in range(3):
-            if field[i][j]["text"] != el or field[i][j]["text"] == "   ":
+            if field[j][i]["text"] != el or field[j][i]["text"] == "   ":
                 flag = False
         if flag:
             return True
@@ -70,7 +80,7 @@ def winner():
             new_game_btn.grid(row=8, column=0, columnspan=4)
         else:
             end_label = tk.Label(window, text="Игрок 0 выйграл",
-                     bg="#00c4a8",
+                    bg="#00c4a8",
                      fg="white",
                      font=("Arial", 15),
                      )
@@ -81,6 +91,21 @@ def winner():
                       command=lambda: clean(new_game_btn, end_label),
                       borderwidth=0,
                       )
+            new_game_btn.grid(row=8, column=0, columnspan=4)
+    else:
+        if draw():
+            draw_label = tk.Label(window, text="Ничья",
+                                  bg="#00c4a8",
+                                  fg="white",
+                                  font=("Arial", 15),
+                                  )
+            draw_label.grid(row=7, column=0, columnspan=4)
+
+            new_game_btn = tk.Button(window, text="Начать новую игру?",
+                                     font=("Arial", 15),
+                                     command=lambda: clean(new_game_btn, draw_label),
+                                     borderwidth=0,
+                                     )
             new_game_btn.grid(row=8, column=0, columnspan=4)
 
 
