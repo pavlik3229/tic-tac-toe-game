@@ -5,36 +5,46 @@ move = 1
 moves = [" X ", " 0 "]
 field = []
 
-def clean():
+def clean(button, label):
     for i in range(3):
         for j in range(3):
             field[i][j]['text'] = "   "
     global move
     move = 1
+    button.destroy()
+    label.destroy()
 
 
 def is_win():
-    flag = True
     for i in range(3):
         el = field[i][0]["text"]
         flag = True
+        for j in range(3):         #горизонтально
+            if field[i][j]["text"] != el or field[i][j]["text"] == "   ":
+                flag = False
+        if flag:
+            return True
+
+    for i in range(3):
+        el = field[0][i]
+        flag = True             #вертикально
         for j in range(3):
             if field[i][j]["text"] != el or field[i][j]["text"] == "   ":
                 flag = False
-    if flag:
-        return True
+        if flag:
+            return True
 
     flag = True
     for i in range(3):
-        el = field[0][0]["text"]
+        el = field[0][0]["text"]   #главная диагональ
         if field[i][i]["text"] != el or field[i][i]["text"] == "   ":
             flag = False
     if flag:
         return True
 
     flag = True
-    el = field[0][2]
-    for i in range(3):
+    el = field[0][2]["text"]
+    for i in range(3):             #побочная диагональ
         if field[i][2 - i]["text"] != el or field[i][2 - i]["text"] == "   ":
             flag = False
 
@@ -45,27 +55,34 @@ def winner():
     global move
     if is_win():
         if move == 1:
-            tk.Label(window, text="Игрок Х выйграл",
-                   bg="#00c4a8",
-                   fg="white",
-                   font=("Arial", 15),
-                   ).grid(row=6, column=0, columnspan=4)
-            tk.Button(window, text="Начать новую игру?",
-                      font=("Arial", 15),
-                      command=clean(),
-                      borderwidth=0,
-            ).grid(row=7, column=0, columnspan=4)
+            end_label = tk.Label(window, text="Игрок X выйграл",
+                                 bg="#00c4a8",
+                                 fg="white",
+                                 font=("Arial", 15),
+                                 )
+            end_label.grid(row=7, column=0, columnspan=4)
+
+            new_game_btn = tk.Button(window, text="Начать новую игру?",
+                                     font=("Arial", 15),
+                                     command=lambda: clean(new_game_btn, end_label),
+                                     borderwidth=0,
+                                     )
+            new_game_btn.grid(row=8, column=0, columnspan=4)
         else:
-            tk.Label(window, text="Игрок 0 выйграл",
+            end_label = tk.Label(window, text="Игрок 0 выйграл",
                      bg="#00c4a8",
                      fg="white",
                      font=("Arial", 15),
-                     ).grid(row=6, column=0, columnspan=4)
-            tk.Button(window, text="Начать новую игру?",
+                     )
+            end_label.grid(row=7, column=0, columnspan=4)
+
+            new_game_btn = tk.Button(window, text="Начать новую игру?",
                       font=("Arial", 15),
-                      command=clean(),
+                      command=lambda: clean(new_game_btn, end_label),
                       borderwidth=0,
-                      ).grid(row=7, column=0, columnspan=4)
+                      )
+            new_game_btn.grid(row=8, column=0, columnspan=4)
+
 
 def choise(button_name):
     global move

@@ -9,7 +9,7 @@ def print_fied():
 
 def is_win():
     flag = True
-    for i in range(3):
+    for i in range(3):        #горизонтально
         el = field[i][0]
         flag = True
         for j in range(3):
@@ -17,10 +17,11 @@ def is_win():
                 flag = False
     if flag:
         return True
+    flag = True
 
     flag = True
     for i in range(3):
-        el = field[0][0]
+        el = field[0][0]      #главная диагональ
         if field[i][i] != el or field[i][i] == "[ ]":
             flag = False
     if flag:
@@ -28,7 +29,7 @@ def is_win():
 
     flag = True
     el = field[0][2]
-    for i in range(3):
+    for i in range(3):     #побочная диагональ
         if field[i][2 - i] != el or field[i][2 - i] == "[ ]":
             flag = False
 
