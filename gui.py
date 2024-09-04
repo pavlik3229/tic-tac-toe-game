@@ -1,9 +1,9 @@
 import tkinter as tk
 
 window = tk.Tk()
-
-
+move = 1
 moves = [" X ", " 0 "]
+field = []
 
 def clean():
     for i in range(3):
@@ -76,7 +76,7 @@ def choise(button_name):
         btn2["underline"] = 0
         btn1["underline"] = 1
 
-move = 1
+
 def main(r, c):
     global move
     if move == 1:
@@ -134,7 +134,7 @@ label_1.grid(row=0, column=0, columnspan=5)
 btn1.grid(row=0, column=6)
 btn2.grid(row=0, column=7)
 
-field = []
+
 
 for i in range(3):
     swop = []
