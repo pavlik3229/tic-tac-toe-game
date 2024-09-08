@@ -1,6 +1,7 @@
 
 
-for i in range(3):
-    for j in range():
-        print(i, j, sep=" ")
-        break
+bebra = (True, 123)
+
+b, a = bebra
+
+print(b, a, sep="\n")
