@@ -1,6 +1,7 @@
 import tkinter as tk
 
 class View:
+    """Work with graphical interface"""
 
     def __init__(self, game):
         self.game = game
@@ -140,6 +141,8 @@ class View:
 
 
 class Game:
+    """Main game logic"""
+
     field = []
     def __init__(self, viev):
         self.viev = viev
@@ -162,35 +165,40 @@ class Game:
         self.viev.choise(0)
 
     def is_win(self):
+
+        #horizontal
         for i in range(3):
             el = self.field[i][0]["text"]
             flag = True
-            for j in range(3):  # горизонтально
+            for j in range(3):
                 if self.field[i][j]["text"] != el or self.field[i][j]["text"] == "   ":
                     flag = False
             if flag:
                 return True
 
+        #vertical
         for i in range(3):
             el = self.field[0][i]["text"]
-            flag = True  # вертикально
+            flag = True
             for j in range(3):
                 if self.field[j][i]["text"] != el or self.field[j][i]["text"] == "   ":
                     flag = False
             if flag:
                 return True
 
+        #main diagonal
         flag = True
         for i in range(3):
-            el = self.field[0][0]["text"]  # главная диагональ
+            el = self.field[0][0]["text"]
             if self.field[i][i]["text"] != el or self.field[i][i]["text"] == "   ":
                 flag = False
         if flag:
             return True
 
+        #side diagonal
         flag = True
         el = self.field[0][2]["text"]
-        for i in range(3):  # побочная диагональ
+        for i in range(3):
             if self.field[i][2 - i]["text"] != el or self.field[i][2 - i]["text"] == "   ":
                 flag = False
 
