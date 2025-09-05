@@ -8,6 +8,7 @@ def print_fied():
 
 
 def is_win():
+    """Проверка горизонтали на вый"""
     flag = True
     for i in range(3):        #горизонтально
         el = field[i][0]
